@@ -21,7 +21,7 @@ server.on('request', (req, res) => {
     case 'GET':
       const stream = fs.createReadStream(filepath);
 
-      res.on('aborted', () => { stream.destroy(); });
+      req.on('aborted', () => { stream.destroy(); });
 
       stream.on('error', error => {
         if (error.code === 'ENOENT') {
